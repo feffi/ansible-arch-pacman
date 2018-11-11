@@ -1,0 +1,6 @@
+---
+ansible_pacman: {
+  mirror: "DE",
+  install: [],
+  remove: []
+}

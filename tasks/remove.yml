@@ -1,0 +1,6 @@
+---
+- name: install pacman packages
+  pacman:
+    name: "{{ ansible_pacman.remove }}"
+    state: absent
+  when: ansible_pacman.remove is defined

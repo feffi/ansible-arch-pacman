@@ -1,0 +1,65 @@
+---
+- name: Push pacman config
+  copy:
+    src: pacman.conf
+    dest: /etc/pacman.conf
+  tags:
+    - pacman
+    - config
+
+- name: Use all cores when compressing packages
+  lineinfile:
+    dest: /etc/makepkg.conf
+    regexp: "{{ item.needle }}"
+    line: "{{ item.replacement }}"
+  with_items:
+    - { needle: "^COMPRESSGZ", replacement: "COMPRESSGZ=(pigz -c -f -n)"}
+    - { needle: "^COMPRESSBZ2", replacement: "COMPRESSBZ2=(bzip2 -c -f)"}
+    - { needle: "^COMPRESSXZ", replacement: "COMPRESSXZ=(xz -c -z - --threads=0)"}
+    - { needle: "^COMPRESSLRZ", replacement: "COMPRESSLRZ=(lrzip -q)"}
+    - { needle: "^COMPRESSLZO", replacement: "COMPRESSLZO=(lzop -q)"}
+    - { needle: "^COMPRESSZ", replacement: "COMPRESSZ=(compress -c -f)"}
+    - { needle: "^INTEGRITY_CHECK", replacement: "INTEGRITY_CHECK=(sha256)"}
+    - { needle: "^", replacement: ""}
+    - { needle: "^", replacement: ""}
+
+- name: Create pacman hook directory
+  file:
+    path: /etc/pacman.d/hooks
+    state: directory
+  tags:
+    - packages
+
+- name: Push pacman mirror list update hook
+  copy:
+    src: mirrorlist.hook
+    dest: /etc/pacman.d/hooks/mirrorlist.hook
+  tags:
+    - packages
+
+- name: Push pacman cache cleanup service
+  copy:
+    src: paccache.service
+    dest: /etc/systemd/system/paccache.service
+  notify:
+    - reload systemd config
+  tags:
+    - packages
+
+- name: Push pacman cache cleanup timer
+  copy:
+    src: paccache.timer
+    dest: /etc/systemd/system/paccache.timer
+  notify:
+    - reload systemd config
+    - restart paccache
+  tags:
+    - packages
+
+- name: Enable and start pacman cache cleanup timer
+  service:
+    name: paccache.timer
+    enabled: yes
+    state: started
+  tags:
+    - packages

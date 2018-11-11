@@ -1,0 +1,9 @@
+---
+- debug:
+    msg: "{{ vars[(role_path | basename).split('.')[-1].replace('-','_')] }}"
+  when: DEBUG | d() | bool
+
+- include_tasks: mirror.yml
+- include_tasks: configure.yml
+- include_tasks: install.yml
+- include_tasks: remove.yml

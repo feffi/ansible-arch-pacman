@@ -1,0 +1,11 @@
+---
+- hosts: 127.0.0.1
+  connection: local
+  vars:
+    ansible_shell:
+      - "zsh"
+      - "zsh-completions"
+      - "bash"
+      - "bash-completion"
+  roles:
+    - { role: ansible-user }

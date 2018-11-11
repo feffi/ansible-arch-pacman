@@ -1,0 +1,13 @@
+---
+- name: "Download pacman mirror list for {{ ansible_pacman.mirror }}"
+  get_url:
+    url: "https://www.archlinux.org/mirrorlist/?country={{ ansible_pacman.mirror }}&protocol=http&ip_version=4&ip_version=6&use_mirror_status=on"
+    dest: "/etc/pacman.d/mirrorlist"
+
+- name: "Uncomment `#Server` in pacman mirror list"
+  replace:
+    dest: "/etc/pacman.d/mirrorlist"
+    regexp: '^#Server'
+    replace: 'Server'
+  notify:
+    - refresh pacman cache

@@ -1,0 +1,6 @@
+---
+- name: install pacman packages
+  pacman:
+    name: "{{ ansible_pacman.install }}"
+    state: present
+  when: ansible_pacman.install is defined
