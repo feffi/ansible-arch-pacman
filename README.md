@@ -8,8 +8,11 @@ Ansible role to configure/add a pacman.
 
 ```yaml
 ansible_pacman: {
+  # The mirror country to use
   mirror: "DE",
+  # Packages to install
   install: [],
+  # Packages to remove
   remove: []
 }
 ```
@@ -20,8 +23,11 @@ Example:
 - hosts: all
   vars:
     ansible_pacman:
+      # The mirror country to use
       mirror: "DE"
+      # Packages to install
       install: []
+      # Packages to remove
       remove: []
   roles:
     - { role: ansible-pacman }
