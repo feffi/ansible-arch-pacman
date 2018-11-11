@@ -7,4 +7,4 @@
   pacman:
     name: "{{ ansible_pacman.install }}"
     state: present
-  when: ansible_pacman.install is defined
+  when: ansible_pacman.install is defined and (ansible_pacman.install | length > 0)
