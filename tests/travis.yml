@@ -2,10 +2,16 @@
 - hosts: 127.0.0.1
   connection: local
   vars:
-    ansible_shell:
-      - "zsh"
-      - "zsh-completions"
-      - "bash"
-      - "bash-completion"
+    ansible_pacman:
+      mirror: "DE"
+      install:
+        - "zsh"
+        - "zsh-completions"
+        - "bash"
+        - "bash-completion"
+      remove:
+        - "zsh-completions"
+        - "bash-completion"
+
   roles:
     - { role: ansible-user }

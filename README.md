@@ -7,7 +7,11 @@ Ansible role to configure/add a pacman.
 ## Role Defaults Variables
 
 ```yaml
-ansible_pacman:
+ansible_pacman: {
+  mirror: "DE",
+  install: [],
+  remove: []
+}
 ```
 
 Example:
@@ -16,7 +20,9 @@ Example:
 - hosts: all
   vars:
     ansible_pacman:
-
+      mirror: "DE"
+      install: []
+      remove: []
   roles:
     - { role: ansible-pacman }
 ```
