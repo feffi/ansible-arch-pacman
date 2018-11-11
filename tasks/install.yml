@@ -1,4 +1,8 @@
 ---
+- name: refresh pacman cache
+  pacman:
+    update_cache: yes
+    
 - name: install pacman packages
   pacman:
     name: "{{ ansible_pacman.install }}"
