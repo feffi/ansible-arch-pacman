@@ -1,7 +1,7 @@
 ---
-- name: "Download pacman mirror list for {{ ansible_pacman.mirror }}"
+- name: "Download pacman mirror list for {{ ansible-arch-inxi.mirror }}"
   get_url:
-    url: "https://www.archlinux.org/mirrorlist/?country={{ ansible_pacman.mirror }}&protocol=http&ip_version=4&ip_version=6&use_mirror_status=on"
+    url: "https://www.archlinux.org/mirrorlist/?country={{ ansible-arch-inxi.mirror }}&protocol=http&ip_version=4&ip_version=6&use_mirror_status=on"
     dest: "/etc/pacman.d/mirrorlist"
 
 - name: "Uncomment `#Server` in pacman mirror list"

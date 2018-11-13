@@ -1,6 +1,6 @@
 ---
 - name: remove pacman packages
   pacman:
-    name: "{{ ansible_pacman.remove }}"
+    name: "{{ ansible-arch-inxi.remove }}"
     state: absent
-  when: ansible_pacman.remove is defined and (ansible_pacman.remove | length > 0)
+  when: ansible-arch-inxi.remove is defined and (ansible-arch-inxi.remove | length > 0)

@@ -1,5 +1,5 @@
 ---
-ansible_pacman: {
+ansible_arch_pacman: {
   # The mirror country to use
   mirror: "DE",
   # Packages to install

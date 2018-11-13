@@ -5,6 +5,6 @@
     
 - name: install pacman packages
   pacman:
-    name: "{{ ansible_pacman.install }}"
+    name: "{{ ansible-arch-inxi.install }}"
     state: present
-  when: ansible_pacman.install is defined and (ansible_pacman.install | length > 0)
+  when: ansible-arch-inxi.install is defined and (ansible-arch-inxi.install | length > 0)
